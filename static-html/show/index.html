@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Media Gallery</title>
+    <style>
+        @keyframes fadeInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes previewFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .media-gallery {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            padding: 40px;
+            background-color: transparent;
+            opacity: 0;
+            animation: fadeInFromLeft 0.8s ease-out forwards;
+        }
+
+        .media-row {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .media-item {
+            width: 160px;
+            height: 120px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .media-item img,
+        .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 预览遮罩层 */
+        .preview-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: previewFadeIn 0.3s ease-out;
+        }
+
+        .preview-overlay img,
+        .preview-overlay video {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="media-gallery">
+    <!-- 图片展示 -->
+    <section class="section">
+        <h2 class="section-title">图片展示</h2>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section class="section">
+        <div class="media-row">
+            <div class="media-item" data-type="img" data-src="/images/pack_anly.jpg">
+                <img src="/images/pack_anly.jpg" />
+            </div>
+            <!-- 可继续添加 -->
+        </div>
+    </section>
+
+    <!-- 视频展示 -->
+    <section class="section">
+        <h2 class="section-title">视频展示</h2>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section class="section">
+        <div class="media-row">
+            <div class="media-item" data-type="video" data-src="/videos/3d_map.mp4">
+                <video src="/videos/3d_map.mp4" muted></video>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- 预览层 -->
+<div class="preview-overlay" onclick="hidePreview()" id="preview"></div>
+
+<script>
+    window.showPreview = function(type, src) {
+        const preview = document.getElementById('preview');
+        preview.innerHTML = '';
+
+        let el;
+        if (type === 'img' || type === 'jpg') {
+            el = document.createElement('img');
+            el.src = src;
+        } else {
+            el = document.createElement('video');
+            el.src = src;
+            el.controls = true;
+            el.autoplay = true;
+        }
+
+        preview.appendChild(el);
+        preview.style.display = 'flex';
+    };
+
+    window.hidePreview = function () {
+        const preview = document.getElementById('preview');
+        preview.style.display = 'none';
+        preview.innerHTML = '';
+    };
+
+    // 自动绑定所有 media-item 点击事件
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.media-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const type = item.getAttribute('data-type');
+                const src = item.getAttribute('data-src');
+                if (type && src) {
+                    showPreview(type, src);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vertical Timeline</title>
+    <style>
+        @keyframes fadeInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px); /* 向左偏移 */
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .experience-page {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            padding: 40px;
+            background-color: transparent;
+
+            opacity: 0;
+            animation: fadeInFromLeft 0.8s ease-out forwards;
+        }
+
+        .section {
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 左侧竖线 */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            bottom: 0;
+            left: 10px;
+            width: 3px;
+            background: #ccc;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        .timeline-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #333;
+            font-size: 10px;
+            padding-top: 15px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 20px;
+            left: 4px; /* 让圆点中心落在竖线正中 */
+            width: 10px;
+            height: 10px;
+            background: #00bcd4;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px #00bcd4;
+        }
+
+        .timeline-time {
+            font-size: 10px;
+            color: #999;
+            margin-bottom: 4px;
+            margin-top: 4px;
+        }
+
+        .timeline-content {
+            background: #fff;
+            padding: 5px 10px;
+            margin-left: -11px;
+            font-size: 10px;
+        }
+
+        /* 整体滚动条宽度 */
+        ::-webkit-scrollbar {
+            width: 2px;       /* 垂直滚动条宽度 */
+            height: 6px;      /* 水平滚动条高度 */
+        }
+
+        /* 滚动条轨道背景 */
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* 滚动条滑块 */
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3); /* 可根据主题调整颜色 */
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        /* 鼠标悬停时滑块颜色变化 */
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+<div class="scroll-wrapper">
+
+</div>
+
+<div class="experience-page">
+    <section class="section">
+        <h2 class="section-title">项目经验</h2>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- 教育背景 -->
+    <section class="section">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-title">消息处理平台</div>
+                <div class="timeline-time">
+                    项目简介：该平台集成飞书应用与企业内部消息处理需求，支持权限管理、系统配置、
+                    自动化提单和消息收集等功能， 通过对接飞书开放平台，实现自动化办公与数据可视化。<br>
+                </div>
+                <div class="timeline-content">
+                    • 负责所有模块化页面开发，基于ElementUI封装可复用组件库；<br>
+                    • 编写高复用组件，实现复杂的筛选和表单配置功能；<br>
+                    • 集成了企业内部用户系统，支持飞书扫码登录，并设计了完善的权限控制系统；<br>
+                    • 通过实现虚拟滚动和资源延迟加载，使表格能够展示大量的资源文件；<br>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-title">性能地图可视化系统</div>
+                <div class="timeline-time">
+                    项目简介：面向测试与美术人员，构建一套 Web 端三维地图可视化平台，基于游戏真实地图与性能数据，
+                    实现角色轨迹回放与指标分析， 支持大体积地图在浏览器中高性能渲染与交互操作。
+                </div>
+                <div class="timeline-content">
+                    • 将 1:1 游戏大地图按网格划分为小块区域，导出为多个 .glb 模型，按坐标动态拼接，避免单文件过大导致加载失败；<br>
+                    •基于 Three.js 搭建地图 Tile 加载器，支持懒加载、并发控制、错误重试与替代占位模型；<br>
+                    • 使用 glTF + DRACO 替换 .obj，平均压缩率达 80%，降低 GPU 上传压力，显著优化首屏加载；<br>
+                    •设置全景摄像机视角，首次渲染即展示完整地图，增强空间认知与浏览效率。<br>
+                    • 将角色移动数据转为轨迹曲线，基于 Line 和动画帧播放系统绘制路径；<br>
+                    • 性能数据（如帧率/内存/卡顿）绑定轨迹点展示，集成 Tooltip + Hover 高亮 + 时间滑块；<br>
+                    • 支持多轨迹对比、轨迹过滤与时序控制，辅助定位性能瓶颈区域；<br>
+                    • 使用 Three.js 构建地形、摄像机、轨迹线等渲染实体；<br>
+                    • 封装地图加载器、性能数据渲染器、轨迹控制器，形成组件化架构；<br>
+                    • 提供地图版本选择、性能指标开关、视角重置等操作入口 <br>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-title">企业内部 App</div>
+                <div class="timeline-time">
+                    项目简介：参与公司内部多个业务 App 的开发，涵盖游戏包体分发、
+                    设备管理与问题反馈提单等场景，提升项目交付效率和设备管理流程。
+                </div>
+                <div class="timeline-content">
+                    游戏商店：<br>
+                    •  实现登录认证与权限控制，未登录状态仅可下载公共应用，登录后根据项目分配权限； <br>
+                    •  支持主包 + 多个 OBB 附件组合下载，并确保 OBB 文件落盘至指定目录，以支持包体安装； <br>
+                    •  包体状态实时展示，处理下载失败与权限异常等场景。 <br><br>
+
+                    设备管理：<br>
+                    •  完成设备信息注册、所属人 / 部门绑定与状态更新；<br>
+                    •  实现设备借用、归还操作与借用记录维护，支持历史查询；<br>
+                    •  提升设备管理流程效率，确保设备可追踪与可控。<br> <br>
+
+                    提单助手： <br>
+                    •  支持快速生成飞书工单，集成问题描述、日志、截图等关键数据；<br>
+                    •  实现本地文件选择与上传，支持异常自动截图与补充；<br>
+                    •  优化提单流程，提升研发 / 测试问题响应效率。<br>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-title">技术中心平台模块开发</div>
+                <div class="timeline-content">
+                    自动化代码运行模块（任务配置 + 流程状态追踪）<br>
+                    • 通过拖拽式交互界面，实现测试用例与流水线参数的组合配置，生成并保存任务；<br>
+                    • 任务执行时会触发流水线，前端接收并展示各脚本的运行状态与实时反馈；<br>
+                    • 运行报告中展示关键节点截图、异常报错展示堆栈信息，运行全程的视频录屏；<br>
+                    • 实现完整任务追踪视图，包括状态流转、截图查看、报错详情与历史记录等。<br>。<br>
+
+                    包体检测模块（可视化数据展示 + 性能优化）<br>
+                    • 使用 ECharts 实现检测数据的饼图、折线图与表格展示，支持多版本对比分析；<br>
+                    • 处理大批量数据加载性能瓶颈，优化数据渲染与分页逻辑，提升页面响应速度；<br>。<br>
+
+                    游戏存档文件管理模块（文件批量操作 + 分支管理）；<br>
+                    • 实现按分支查看/管理游戏存档文件，支持列表展示、下载、删除、复制等操作；<br>
+                    • 支持添加/删除分支、批量处理与跨分支文件复制。<br>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</div>
+
+
+</body>
+</html>

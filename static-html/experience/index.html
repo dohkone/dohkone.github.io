@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vertical Timeline</title>
+    <style>
+        @keyframes fadeInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px); /* 向左偏移 */
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .experience-page {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            padding: 40px;
+            background-color: transparent;
+
+            opacity: 0;
+            animation: fadeInFromLeft 0.8s ease-out forwards;
+        }
+
+        .section {
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 左侧竖线 */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            bottom: 0;
+            left: 10px;
+            width: 3px;
+            background: #ccc;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        .timeline-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #333;
+            font-size: 10px;
+            padding-top: 15px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 20px;
+            left: 4px; /* 让圆点中心落在竖线正中 */
+            width: 10px;
+            height: 10px;
+            background: #00bcd4;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px #00bcd4;
+        }
+
+        .timeline-time {
+            font-size: 10px;
+            color: #999;
+            margin-bottom: 4px;
+            margin-top: 4px;
+        }
+
+        .timeline-content {
+            background: #fff;
+            padding: 5px 10px;
+            margin-left: -11px;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="experience-page">
+    <section class="section">
+        <h2 class="section-title">工作经历</h2>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- 教育背景 -->
+    <section class="section">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-title">上海鹰角网络科技有限公司</div>
+                <div class="timeline-time"><font color="#00bcd4">2022.07-2025.05</font> / 工具与平台</div>
+                <div class="timeline-content">
+                    负责技术中心平台，消息处理平台，数据可视化等前端开发工作；
+                    负责多款研发效能App的开发；
+                    负责搭建自动化打包，P4 同步等工具流水线；
+                    完成其他项目及部门的工具开发工作。
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-title">广州昆仑信息科技有限公司</div>
+                <div class="timeline-time"><font color="#00bcd4">2021.08-2022.07</font> / 工具开发</div>
+                <div class="timeline-content">
+                    独立负责引擎SDK和工具的研发与集成，包括资源解析工具，协议转发SDK，自动化框架搭建，性能工具和SDK开发等
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-title">广州四三九九信息科技有限公司</div>
+                <div class="timeline-time"><font color="#00bcd4">2018.12-2021.08</font> / 游戏主测试</div>
+                <div class="timeline-content">
+                    负责核心功能模块测试与项目质量管理，带领团队制定测试计划并培训新人，同时开发维护机器人工具用于协议模拟和服务器压力测试。
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
